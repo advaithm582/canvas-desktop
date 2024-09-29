@@ -7,6 +7,8 @@
  * @author Advaith Menon
  */
 
+#ifndef _LIBCANVAS_AUTH_H_
+#define _LIBCANVAS_AUTH_H_
 struct auth_token {
     /**
      * The authentication mode to use. Current modes are:
@@ -35,5 +37,6 @@ struct auth_token {
  * @param expiry The expiry of this token w.r.t epoch time.
  * @return a pointer to an auth structure.
  */
-struct auth_token *canvas_init_token_bare(const char*, unsigned long);
+struct auth_token *canvas_init_token_bare(char*, unsigned long);
 
+#endif /* _LIBCANVAS_AUTH_H */
