@@ -9,6 +9,15 @@ TBH I am just doing this project to get better at C. I did want to use it to get
 better at DSA, but why take the risk if it is all implrmrnted in GLib already -
 don't reinvent the wheel.
 
+## Dependencies
+> This is work in progress and is subject to change anytime. Commands here may
+> not work and could brick your system if you don't know what you are doing!
+* GLib 2.74.6
+* cJSON 1.7.15
+
+Install it with:
+`sudo apt install libglib2.0-dev libcjson-dev`
+
 ## Roadmap
 This project aims to first create a "library" of functions that can be used to
 access Canvas data for students. This can be considered as a canvas SDK for C.
