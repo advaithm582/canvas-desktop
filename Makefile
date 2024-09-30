@@ -1,4 +1,5 @@
 CC:=gcc
+CCS:=$(CC) -ansi -pedantic
 LIBCANVAS_SRC:=src/libcanvas
 BUILD_DIR:=build
 
@@ -8,8 +9,8 @@ $(BUILD_DIR)/libcanvas/*.o: $(LIBCANVAS_SRC)/*.c
 	@for i in $^; do\
 		j=$${i##*/};\
 		j=$${j%.c};\
-		$(CC) -c -Wall -Werror -fpic $$i -o $(BUILD_DIR)/libcanvas/$$j.o;\
-	done
+		$(CCS) -c -Wall -Werror -fpic $$i -o $(BUILD_DIR)/libcanvas/$$j.o;\
+		done
 
 libcanvas_build: $(BUILD_DIR)/libcanvas/*.o
 	@echo "Build shared object..."
@@ -17,7 +18,8 @@ libcanvas_build: $(BUILD_DIR)/libcanvas/*.o
 
 libcanvas_test: libcanvas_build
 	@echo Build test executable...
-	@$(CC) -I$(CURDIR)/src/ $(shell pkg-config --cflags glib-2.0) -Wall \
+	@$(CC) -ansi \
+		-I$(CURDIR)/src/ $(shell pkg-config --cflags glib-2.0) -Wall \
 		-o build/testlibcanvas $(wildcard test/libcanvas/*.c) \
 		-L$(CURDIR)/build/ -lcanvas \
 		 $(shell pkg-config --libs glib-2.0)

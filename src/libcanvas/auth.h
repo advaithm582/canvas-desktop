@@ -37,6 +37,6 @@ struct auth_token {
  * @param expiry The expiry of this token w.r.t epoch time.
  * @return a pointer to an auth structure.
  */
-struct auth_token *canvas_init_token_bare(char*, unsigned long);
+struct auth_token *canvas_init_token_bare(char* token, unsigned long expiry);
 
 #endif /* _LIBCANVAS_AUTH_H */
