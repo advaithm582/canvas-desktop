@@ -9,6 +9,10 @@
 
 #ifndef _LIBCANVAS_AUTH_H_
 #define _LIBCANVAS_AUTH_H_
+
+#include "error.h"
+
+
 struct auth_token {
     /**
      * The authentication mode to use. Current modes are:
@@ -19,8 +23,14 @@ struct auth_token {
 
     /**
      * The authentication token itself, as a pointer to a string.
+     * This, in particular, will always be the access token.
      */
     char *token;
+
+    /**
+     * The refresh token. Use only when there is OAuth.
+     */
+    char *refresh;
 
     /**
      * The expiry time, as epoch seconds. 0 indicates no expiry.
@@ -38,5 +48,19 @@ struct auth_token {
  * @return a pointer to an auth structure.
  */
 struct auth_token *canvas_init_token_bare(char* token, unsigned long expiry);
+
+
+/**
+ * Get the authentication token to use with any API request. Normally, this call
+ * will be done internally, since we will pass the AUTH object around.
+ *
+ * <b>WARNING!</b> Don't modify or free() the token returned by this object,
+ * since it points to the internal token (it is not a copy!)
+ *
+ * @param auth The authentication object
+ * @param token A pointer to the token string.
+ * @return An error code as defined in error.h.
+ */
+CANVAS_ERROR canvas_get_access_token(struct auth_token *auth, char **token);
 
 #endif /* _LIBCANVAS_AUTH_H */
