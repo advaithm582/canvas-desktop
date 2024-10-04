@@ -10,9 +10,12 @@
  * token must be whatever was provided (arbitary length).
  */
 void test_canvas_init_token_bare() {
-    AUTH *canvas_auth = canvas_init_token_bare("qwerty1234ASDFzxcvbnm", 632);
+    AUTH *canvas_auth = canvas_init_token_bare("https://gatech.instructure.com",
+            "qwerty1234ASDFzxcvbnm", 632);
     /* now check if mode and token equal what you want it to be. */
     /* important - the mode check */
+    g_assert_cmpstr(canvas_auth->url, ==,
+            "https://gatech.instructure.com");
     g_assert(canvas_auth->mode == 't');
     g_assert_cmpstr(canvas_auth->token, ==, "qwerty1234ASDFzxcvbnm");
     g_assert(canvas_auth->expires == 632UL);
@@ -22,8 +25,10 @@ void test_canvas_init_token_bare() {
  * Test getting the access token with a bare token.
  */
 void test_canvas_get_access_token_bareauth() {
-    AUTH *auth = canvas_init_token_bare("demoTokenWillBeValidFor5Secs", 
-            ((unsigned long) time(NULL)) + 2);
+    AUTH *auth = canvas_init_token_bare(
+            "https://gatech.instructure.com",
+            "demoTokenWillBeValidFor5Secs", 
+            time(NULL) + 2);
     /* hopefully, this is not running on UNIVAC... */
     char *token = NULL;
     g_assert_cmphex(canvas_get_access_token(auth, &token), ==, CANVASE_OK);
@@ -37,7 +42,9 @@ void test_canvas_get_access_token_bareauth() {
  * Test getting access token with null input.
  */
 void test_canvas_get_access_token_null() {
-    AUTH *auth = canvas_init_token_bare("demoTokenWillBeValidFor5Secs", 
+    AUTH *auth = canvas_init_token_bare(
+            "https://gatech.instructure.com",
+            "demoTokenWillBeValidFor5Secs", 
             293UL);
     char *token = NULL;
     g_assert_cmphex(canvas_get_access_token(NULL, NULL), ==,

@@ -10,10 +10,18 @@
 #ifndef _LIBCANVAS_AUTH_H_
 #define _LIBCANVAS_AUTH_H_
 
+#include <time.h>
+
 #include "error.h"
 
 
 struct auth_token {
+    /**
+     * The URL of this Canvas Instance. Includes everything but a trailing
+     * slash.
+     */
+    char* url;
+
     /**
      * The authentication mode to use. Current modes are:
      * t (116) - use bare token, no refresh, after expiry its useless
@@ -47,7 +55,8 @@ struct auth_token {
  * @param expiry The expiry of this token w.r.t epoch time.
  * @return a pointer to an auth structure.
  */
-struct auth_token *canvas_init_token_bare(char* token, unsigned long expiry);
+struct auth_token *canvas_init_token_bare(char* url, char* token, 
+        time_t expiry);
 
 
 /**
