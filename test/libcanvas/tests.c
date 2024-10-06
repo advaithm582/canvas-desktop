@@ -12,5 +12,9 @@ int main(int argc, char** argv) {
 
     g_test_add_func("/Error/IsCategoryPrimary",
             test_canvas_error_is_category_primary);
+    g_test_add_func("/Courses/CourseTermMethodsNormal",
+            test_canvas_course_term_methods_normal);
+    g_test_add_func("/Courses/CourseTermMethodsError",
+            test_canvas_course_term_methods_error);
     return g_test_run();
 }
