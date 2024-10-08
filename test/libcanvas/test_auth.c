@@ -16,9 +16,9 @@ void test_canvas_init_token_bare() {
     /* important - the mode check */
     g_assert_cmpstr(canvas_auth->url, ==,
             "https://gatech.instructure.com");
-    g_assert(canvas_auth->mode == 't');
+    g_assert_true(canvas_auth->mode == 't');
     g_assert_cmpstr(canvas_auth->token, ==, "qwerty1234ASDFzxcvbnm");
-    g_assert(canvas_auth->expires == 632UL);
+    g_assert_true(canvas_auth->expires == 632UL);
 }
 
 /**
@@ -33,7 +33,7 @@ void test_canvas_get_access_token_bareauth() {
     char *token = NULL;
     g_assert_cmphex(canvas_get_access_token(auth, &token), ==, CANVASE_OK);
     g_assert_cmpstr(token, ==, "demoTokenWillBeValidFor5Secs");
-    g_assert(sleep(2) == 0UL);
+    g_assert_true(sleep(2) == 0UL);
     g_assert_cmphex(canvas_get_access_token(auth, &token),
                 ==, CANVASE_AUTH_BARE_EXPIRED_TOKEN);
 }

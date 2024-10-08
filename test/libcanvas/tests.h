@@ -16,5 +16,6 @@ void test_canvas_error_is_category_primary();
 
 void test_canvas_course_term_methods_normal(void);
 void test_canvas_course_term_methods_error(void);
+void test_canvas_course_term_constructor(void);
 
 #endif /* _LIBCANVAS_TESTS_H_ */
